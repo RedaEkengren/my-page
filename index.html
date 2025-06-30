@@ -3,114 +3,457 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Reda Ekengren's Github Page</title>
+  <title>Reda Ekengren - Cloud & Infrastructure Specialist</title>
   <style>
-    body {
-      background-color: #f0f8ff;
-      color: #333;
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
-      padding: 2rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    h1 {
-      font-size: 2rem;
-      text-align: center;
-      margin-top: 0;
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    img {
-      display: block;
-      max-width: 200px;
+    /* Animated background particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      border-radius: 100px;
-      margin: 1rem auto;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .about {
-      margin-top: 2rem;
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
     }
 
-    .link-section {
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Glassmorphism container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       margin-top: 2rem;
+      margin-bottom: 2rem;
+      animation: slideInUp 1s ease-out;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header with gradient text */
+    .header {
       text-align: center;
+      margin-bottom: 3rem;
     }
 
-    .button-link {
+    .name {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.9; }
+    }
+
+    /* Profile image with hover effects */
+    .profile-section {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .profile-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); }
+    }
+
+    .profile-image:hover {
+      transform: scale(1.1) rotate(5deg);
+      border-color: #4ecdc4;
+      box-shadow: 0 0 30px rgba(78, 205, 196, 0.5);
+    }
+
+    /* About section with cards */
+    .about-section {
+      margin-bottom: 3rem;
+    }
+
+    .about-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4ecdc4;
+      transition: all 0.3s ease;
+      transform: translateX(-20px);
+      opacity: 0;
+      animation: slideInLeft 1s ease-out forwards;
+    }
+
+    .about-card:nth-child(2) { animation-delay: 0.2s; }
+    .about-card:nth-child(3) { animation-delay: 0.4s; }
+    .about-card:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes slideInLeft {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .about-card:hover {
+      transform: translateX(10px);
+      background: rgba(255, 255, 255, 0.15);
+      border-left-color: #ff6b6b;
+    }
+
+    .about-card p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    /* Skills tags */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .skill-tag {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      animation: bounceIn 1s ease-out;
+    }
+
+    .skill-tag:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* Links section */
+    .links-section {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .link-button {
       display: inline-block;
-      margin: 0.5rem;
-      padding: 0.75rem 1.5rem;
+      margin: 1rem;
+      padding: 1rem 2rem;
       text-decoration: none;
       color: white;
-      background-color: #0073b1; /* LinkedIn blue */
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
     }
 
-    .button-link.youtube-link {
-      background-color: #ff0000;
+    .link-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
-    .button-link.email-link {
-      background-color: #6a5acd;
+    .link-button:hover::before {
+      left: 100%;
     }
 
-    .button-link:hover {
-      opacity: 0.85;
+    .linkedin-btn {
+      background: linear-gradient(45deg, #0077b5, #00a0dc);
+    }
+
+    .youtube-btn {
+      background: linear-gradient(45deg, #ff0000, #ff4444);
+    }
+
+    .email-btn {
+      background: linear-gradient(45deg, #6a5acd, #9370db);
+    }
+
+    .link-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Floating elements */
+    .floating-element {
+      position: absolute;
+      pointer-events: none;
+      animation: floatAround 10s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      top: 20%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      bottom: 30%;
+      left: 5%;
+      animation-delay: 4s;
+    }
+
+    @keyframes floatAround {
+      0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      25% { transform: translateY(-20px) translateX(10px) rotate(90deg); }
+      50% { transform: translateY(-10px) translateX(-10px) rotate(180deg); }
+      75% { transform: translateY(20px) translateX(5px) rotate(270deg); }
+    }
+
+    .code-symbol {
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.1);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      
+      .name {
+        font-size: 2.5rem;
+      }
+      
+      .profile-image {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .link-button {
+        display: block;
+        margin: 1rem auto;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Hello, my name is Reda Ekengren</h1>
+  <!-- Animated background particles -->
+  <div class="particles" id="particles"></div>
 
-  <!-- Your profile picture -->
-  <img src="https://raw.githubusercontent.com/RedaEkengren/my-page/refs/heads/main/Jag%20600x600.png" alt="Photo of Reda" />
-
-  <div class="about">
-    <p>
-      Ever since I was 5 years old I've been in love with computers.    
-      For some strange reason, maybe as a form of teenage rebellion I ended up in the vehicle program and trained to become a mechanic. 
-      I also hold a diploma as a high-voltage technician for vehicles.
-    </p>
-
-    <p>
-      But now I've returned to my roots, I'm currently studying a program at EC Utbildning called Cloud and Infrastructure Specialist. It feels fantastic to be back in the world of IT.
-    </p>
-
-    <p>
-      I've always loved creating content, so I decided to start making some videos of my own on YouTube. 
-      I’ve created a series about server administration that covers setting up Active Directory, GPOs, file servers, file shares with permissions, NAT, backups and shadow copies, as well as creating an admin account and disabling UAC. 
-      The virtual machines in the series include domain controllers, a DHCP server, a router, Windows 10 machines, and a file server.
-    </p>
-
-    <p>
-      I'm 2/3 through my studies and currently looking for a place to do my LIA (learning in a work environment). I'm interested in Linux, server administration, Active Directory, Azure, Microsoft 365, and much more. 
-    </p>
+  <!-- Floating code elements -->
+  <div class="floating-element">
+    <div class="code-symbol">&lt;/&gt;</div>
+  </div>
+  <div class="floating-element">
+    <div class="code-symbol">{ }</div>
+  </div>
+  <div class="floating-element">
+    <div class="code-symbol">01010</div>
   </div>
 
-  <div class="link-section">
-    <p>
-      <a class="button-link linkedin-link" href="https://www.linkedin.com/in/reda-karl-ekengren-b2a05623b/" target="_blank" rel="noopener noreferrer">
-        Connect with me on LinkedIn
-      </a>
-    </p>
+  <div class="container">
+    <div class="header">
+      <h1 class="name">Reda Ekengren</h1>
+      <p class="subtitle">Cloud & Infrastructure Specialist | Content Creator | Tech Enthusiast</p>
+    </div>
 
-    <p>
-      <a class="button-link youtube-link" href="https://www.youtube.com/playlist?list=PLKtLqVYyZQx_6gFXPedgwWo76eTRt10kN" target="_blank" rel="noopener noreferrer">
-        Watch My Active Directory Playlist on YouTube
-      </a>
-    </p>
+    <div class="profile-section">
+      <img class="profile-image" src="https://raw.githubusercontent.com/RedaEkengren/my-page/refs/heads/main/Jag.png" alt="Photo of Reda" />
+    </div>
 
-    <p>
-      <a class="button-link email-link" href="mailto:redaekengren@protonmail.com" target="_blank" rel="noopener noreferrer">
-        Email me
+    <div class="skills">
+      <span class="skill-tag">Linux</span>
+      <span class="skill-tag">Active Directory</span>
+      <span class="skill-tag">Azure</span>
+      <span class="skill-tag">Microsoft 365</span>
+      <span class="skill-tag">Server Administration</span>
+      <span class="skill-tag">Cloud Infrastructure</span>
+      <span class="skill-tag">Content Creation</span>
+    </div>
+
+    <div class="about-section">
+      <div class="about-card">
+        <p>
+          🖥️ Ever since I was 5 years old I've been in love with computers. For some strange reason, maybe as a form of teenage rebellion I ended up in the vehicle program and trained to become a mechanic. I also hold a diploma as a high-voltage technician for vehicles.
+        </p>
+      </div>
+      
+      <div class="about-card">
+        <p>
+          ☁️ But now I've returned to my roots! I'm currently studying a program at EC Utbildning called Cloud and Infrastructure Specialist. It feels fantastic to be back in the world of IT.
+        </p>
+      </div>
+      
+      <div class="about-card">
+        <p>
+          🎥 I've always loved creating content, so I decided to start making some videos of my own on YouTube. I've created a series about server administration that covers setting up Active Directory, GPOs, file servers, file shares with permissions, NAT, backups and shadow copies, as well as creating an admin account and disabling UAC.
+        </p>
+      </div>
+      
+      <div class="about-card">
+        <p>
+          🚀 I'm 2/3 through my studies and currently looking for a place to do my LIA (learning in a work environment). I'm passionate about Linux, server administration, Active Directory, Azure, Microsoft 365, and much more!
+        </p>
+      </div>
+    </div>
+
+    <div class="links-section">
+      <a class="link-button linkedin-btn" href="https://www.linkedin.com/in/reda-karl-ekengren-b2a05623b/" target="_blank" rel="noopener noreferrer">
+        🔗 Connect on LinkedIn
       </a>
-    </p>
+      
+      <a class="link-button youtube-btn" href="https://www.youtube.com/playlist?list=PLKtLqVYyZQx_6gFXPedgwWo76eTRt10kN" target="_blank" rel="noopener noreferrer">
+        🎬 Watch My AD DS Series
+      </a>
+      
+      <a class="link-button youtube-btn" href="https://www.youtube.com/playlist?list=PLKtLqVYyZQx9PEq9w_KrddeZREw5gqwhH" target="_blank" rel="noopener noreferrer">
+        🐧 Watch My Linux Series
+      </a>
+      
+      <a class="link-button email-btn" href="mailto:redaekengren@protonmail.com" target="_blank" rel="noopener noreferrer">
+        📧 Send Me an Email
+      </a>
+    </div>
   </div>
+
+  <script>
+    // Create animated particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (3 + Math.random() * 6) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Add hover effect to skill tags
+    document.querySelectorAll('.skill-tag').forEach(tag => {
+      tag.addEventListener('mouseenter', function() {
+        this.style.background = 'linear-gradient(45deg, #4ecdc4, #ff6b6b)';
+      });
+      
+      tag.addEventListener('mouseleave', function() {
+        this.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+      });
+    });
+
+    // Add click effect to profile image
+    document.querySelector('.profile-image').addEventListener('click', function() {
+      this.style.animation = 'none';
+      setTimeout(() => {
+        this.style.animation = 'pulse 2s ease-in-out infinite';
+      }, 100);
+    });
+
+    // Initialize particles when page loads
+    document.addEventListener('DOMContentLoaded', createParticles);
+
+    // Add parallax effect to floating elements
+    document.addEventListener('mousemove', function(e) {
+      const floatingElements = document.querySelectorAll('.floating-element');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      floatingElements.forEach((element, index) => {
+        const speed = (index + 1) * 0.5;
+        const xPos = (x - 0.5) * speed * 50;
+        const yPos = (y - 0.5) * speed * 50;
+        element.style.transform += ` translate(${xPos}px, ${yPos}px)`;
+      });
+    });
+  </script>
 </body>
 </html>
